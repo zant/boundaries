@@ -1,7 +1,7 @@
 import {
   Compose,
   FreeCategory,
-  FreeCategoryInterface,
+  IFreeCategory,
   Identity,
 } from "./FreeCategory/FreeCategory";
 
@@ -12,7 +12,7 @@ function main() {
 
   const idNumber: Identity<number> = (a) => a;
 
-  const NumberFreeCategory: FreeCategoryInterface<number> = FreeCategory(
+  const NumberFreeCategory: IFreeCategory<number> = FreeCategory(
     composeNumber,
     idNumber
   );

@@ -14,6 +14,8 @@ type Eq<A, B, C> = [B] extends [C] // If B is assignable to C
 
 export type Identity<T> = (x: T) => T;
 
+// if i parametrize this over A, B, C i lose the expressivity of <T> being the main type
+// so with Eq we do structural equality over A, B, C, without losing T
 export type Compose<T> = <
   // here pretty much we say they're all equiv
   A extends T,
@@ -28,19 +30,19 @@ export type Compose<T> = <
 // type level than morphisms
 // this is because we want
 // to express structure at the type level
-export interface FreeCategoryInterface<T> {
+export interface IFreeCategory<T> {
   id: Identity<T>;
   compose: Compose<T>;
 }
 
 interface FreeCategory<T> {
-  morphisms: FreeCategoryInterface<T>;
+  morphisms: IFreeCategory<T>;
 }
 
 export const FreeCategory = <T>(
   compose: Compose<T>,
   id: Identity<T>
-): FreeCategoryInterface<T> => {
+): IFreeCategory<T> => {
   const category: FreeCategory<T> = {
     morphisms: { compose, id },
   };

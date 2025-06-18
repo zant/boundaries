@@ -35,7 +35,7 @@ export interface IFreeCategory<T> {
   compose: Compose<T>;
 }
 
-interface FreeCategory<T> {
+interface FreeCategoryConstructor<T> {
   morphisms: IFreeCategory<T>;
 }
 
@@ -43,7 +43,7 @@ export const FreeCategory = <T>(
   compose: Compose<T>,
   id: Identity<T>
 ): IFreeCategory<T> => {
-  const category: FreeCategory<T> = {
+  const category: FreeCategoryConstructor<T> = {
     morphisms: { compose, id },
   };
 

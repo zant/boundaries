@@ -1,9 +1,4 @@
-import {
-  Compose,
-  FreeCategory,
-  IFreeCategory,
-  Identity,
-} from "./FreeCategory/FreeCategory";
+import { Compose, FreeCategory, IFreeCategory, Identity } from "./FreeCategory";
 
 function main() {
   const composeNumber: Compose<number> = (g, f) => (a) => g(f(a));

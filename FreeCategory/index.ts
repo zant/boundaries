@@ -2,11 +2,13 @@
 // i.e. stablishing that B is isomorphic with C
 // this also means that a a type belongs to a functor, a functor to a monad, a monad to a category etc
 // in some sense is the concept of having levels
-type Eq<A, B, C> = [B] extends [C] // If B is assignable to C
+export type Eq<A, B, C> = [B] extends [C] // If B is assignable to C
   ? [C] extends [B] // AND C is assignable to B
     ? A // Then return A
     : never // Else (they are not mutually assignable), return never
   : never; // Else (B is not assignable to C), return never
+
+// maybe useful with HTK?
 
 // i have to encode that morphisms respect composition
 // and identity?
@@ -17,10 +19,11 @@ export type Identity<T> = (x: T) => T;
 // if i parametrize this over A, B, C i lose the expressivity of <T> being the main type
 // so with Eq we do structural equality over A, B, C, without losing T
 export type Compose<T> = <
-  // here pretty much we say they're all equiv
+  // here pretty much we say they're all of the same type, even if we use different type params
+  // so we can express the type structure but by keeping `number` for example as an invariant
   A extends T,
-  B extends Eq<A, A, B>,
-  C extends Eq<B, B, C>
+  B extends A,
+  C extends B
 >(
   g: (b: B) => C,
   f: (a: A) => B
